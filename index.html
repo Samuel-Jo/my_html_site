@@ -18,8 +18,12 @@
             height: 720px;
             margin: 0 auto;
             overflow: hidden;
+            background-image: url('https://imgur.com/a/x8GG5B3');
+            background-position: right center;
+            background-size: 300px;
+            background-repeat: no-repeat;
         }
-        .text {
+        .text {     
             position: absolute;
             font-weight: bold;
             letter-spacing: -0.4px;
@@ -27,39 +31,36 @@
         .text.top {
             top: 0;
             left: 8px;
-            font-size: 199.1px;
+            font-size: 180px;
             color: #fff;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         }
         .text.mid {
             top: 204px;
             left: 0;
-            font-size: 199.1px;
+            font-size: 180px;
             color: #ed1818;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         }
         .text.bot {
             top: 399px;
             left: 0;
-            font-size: 199.1px;
+            font-size: 180px;
             color: #ed2424;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         }
         .text.sub {
-            bottom: 92px;
-            left: 140px;
-            font-size: 76.2px;
-            color: #5ef894;
+            bottom: 5px; /* 하단에서 5px 위치 */
+            left: 50%; /* 중앙 정렬을 위해 50%로 설정 */
+            transform: translateX(-50%); /* 중앙 정렬을 위한 변환 */
+            font-size: 76.2px; /* 폰트 크기 */
+            color: #5ef894; /* 텍스트 색상 */
+            position: absolute; /* 위치 설정 */
+            white-space: nowrap; /* 줄 바꿈 방지 */
+            overflow: hidden; /* 넘치는 텍스트 숨기기 */
+            text-overflow: ellipsis; /* 넘치는 텍스트에 생략 부호 추가 */
         }
-        .image {
-            position: absolute;
-            top: 201px;
-            left: 928px;
-            width: 293px;
-            height: 286px;
-            background-color: #333;
-            opacity: 0.9;
-        }
+        
         @media (max-width: 768px) {
             .text.top, .text.mid, .text.bot {
                 font-size: 100px;
@@ -67,23 +68,20 @@
             .text.sub {
                 font-size: 38px;
             }
-            .image {
-                width: 150px;
-                height: 146px;
-                top: 100px;
-                left: 464px;
-            }
+            
         }
     </style>
-    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="container">
         <div class="text top">60대가 모르면</div>
         <div class="text mid">후회하는</div>
         <div class="text bot">5가지 비밀!</div>
+        <div class="text bot"><br><br><br></div>
         <div class="text sub">지금 확인하지 않으면 늦습니다!</div>
-        <div class="image"></div>
+        <div class="image" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 300px; height: auto;">
+            <img src="https://drive.google.com/uc?export=view&id=10QEFBJifbdZC10JJlTpE-NTPli6K8xe9" style="width: 100%; height: auto;" alt="Image">
+        </div>
     </div>
 </body>
 </html>
