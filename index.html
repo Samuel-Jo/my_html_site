@@ -60,6 +60,18 @@
             overflow: hidden; /* 넘치는 텍스트 숨기기 */
             text-overflow: ellipsis; /* 넘치는 텍스트에 생략 부호 추가 */
         }
+        .image {
+            position: absolute;
+            right: 50px; /* 좌측으로 50px 이동 */
+            top: calc(50% + 50px); /* 아래로 50px 이동 */
+            transform: translateY(-50%);
+            width: 300px;
+            height: auto;
+        }
+        .image img {
+            width: 100%;
+            height: auto;
+        }
         
         @media (max-width: 768px) {
             .text.top, .text.mid, .text.bot {
@@ -68,7 +80,6 @@
             .text.sub {
                 font-size: 38px;
             }
-            
         }
     </style>
 </head>
@@ -77,10 +88,9 @@
         <div class="text top">60대가 모르면</div>
         <div class="text mid">후회하는</div>
         <div class="text bot">5가지 비밀!</div>
-        <div class="text bot"><br><br><br></div>
         <div class="text sub">지금 확인하지 않으면 늦습니다!</div>
-        <div class="image" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 300px; height: auto;">
-            <img src="노인지혜.png" style="width: 100%; height: auto;" alt="Image">
+        <div class="image">
+            <img src="노인지혜.png" alt="Image">
         </div>
     </div>
 </body>
