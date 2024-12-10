@@ -135,7 +135,10 @@
             });
 
             document.getElementById('saveButton').addEventListener('click', function() {
-                html2canvas(document.querySelector('.container')).then(canvas => {
+                html2canvas(document.querySelector('.container'), { 
+                    useCORS: true, // CORS 사용 설정
+                    allowTaint: true // 외부 이미지 사용 허용
+                }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'result.png';
                     link.href = canvas.toDataURL();
