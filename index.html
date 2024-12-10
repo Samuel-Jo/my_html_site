@@ -59,7 +59,7 @@
         .image {
             position: absolute;
             right: 100px; 
-            bottom: 230px;
+            bottom: 220px;
             width: 300px;
             height: auto;
         }
@@ -76,18 +76,53 @@
                 font-size: 38px;
             }
         }
+        
+        /* 폼을 아래로 띄우기 위한 스타일 추가 */
+        #uploadForm {
+            margin-top: 100px; /* 내용물에서 100px 아래로 띄움 */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="text top">60대가 모르면</div>
-        <div class="text mid">후회하는</div>
-        <div class="text bot">5가지 비밀!</div>
-        <div class="text sub">지금 확인하지 않으면 늦습니다!</div>
-        <!-- 중복된 이미지 요소 제거 -->
-        <div class="image">
-            <img src="노인지혜.png" alt="Image">
+        <div class="text top" id="topText">60대가 모르면</div>
+        <div class="text mid" id="midText">후회하는</div>
+        <div class="text bot" id="botText">5가지 비밀!</div>
+        <div class="text sub" id="subText">지금 확인하지 않으면 늦습니다!</div>
+        <div class="image" id="imageContainer">
+            <img src="노인지혜.png" alt="Image" id="uploadedImage">
         </div>
     </div>
+
+    <!-- 텍스트와 이미지 업로드를 위한 폼 추가 -->
+    <form id="uploadForm">
+        <input type="text" placeholder="Top Text" id="topInput">
+        <input type="text" placeholder="Mid Text" id="midInput">
+        <input type="text" placeholder="Bot Text" id="botInput">
+        <input type="text" placeholder="Sub Text" id="subInput">
+        <input type="file" id="imageInput" accept="image/*">
+        <button type="submit">업로드</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // 텍스트 업데이트
+            document.getElementById('topText').innerText = document.getElementById('topInput').value;
+            document.getElementById('midText').innerText = document.getElementById('midInput').value;
+            document.getElementById('botText').innerText = document.getElementById('botInput').value;
+            document.getElementById('subText').innerText = document.getElementById('subInput').value;
+
+            // 이미지 업데이트
+            const file = document.getElementById('imageInput').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadedImage').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 </html>
