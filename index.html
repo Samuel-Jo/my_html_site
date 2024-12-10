@@ -139,7 +139,9 @@
                 html2canvas(document.querySelector('.container'), { 
                     useCORS: true,
                     allowTaint: true,
-                    scale: 2
+                    scale: 2,
+                    width: document.querySelector('.container').offsetWidth,
+                    height: document.querySelector('.container').offsetHeight
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'result.png';
