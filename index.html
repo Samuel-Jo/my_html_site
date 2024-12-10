@@ -19,6 +19,7 @@
             margin: 0 auto;
             overflow: hidden;
             background-color: #000;
+            padding: 20px;
         }
         .text {     
             position: absolute;
@@ -139,9 +140,7 @@
                 html2canvas(document.querySelector('.container'), { 
                     useCORS: true,
                     allowTaint: true,
-                    scale: 2,
-                    width: document.querySelector('.container').offsetWidth,
-                    height: document.querySelector('.container').offsetHeight
+                    scale: 3,
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'result.png';
