@@ -136,8 +136,8 @@
 
             document.getElementById('saveButton').addEventListener('click', function() {
                 html2canvas(document.querySelector('.container'), { 
-                    useCORS: true, // CORS 사용 설정
-                    allowTaint: true // 외부 이미지 사용 허용
+                    useCORS: true,
+                    allowTaint: true
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'result.png';
