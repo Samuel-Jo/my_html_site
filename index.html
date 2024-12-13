@@ -126,16 +126,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
+        function adjustTextSize(element) {
+            const container = document.querySelector('.container');
+            const containerWidth = container.offsetWidth - 40; // 패딩 고려
+            const text = element.innerText;
+            
+            // 초기 스타일 설정
+            element.style.fontSize = '160px';
+            element.style.letterSpacing = '0px';
+            
+            // 텍스트가 컨테이너를 벗어나는 경우 조정
+            while (element.offsetWidth > containerWidth && parseInt(element.style.fontSize) > 50) {
+                // 먼저 자간 조정 시도
+                if (parseInt(element.style.letterSpacing) > -3) {
+                    element.style.letterSpacing = (parseInt(element.style.letterSpacing) - 1) + 'px';
+                } 
+                // 자간 조정으로 부족하면 폰트 크기 조정
+                else {
+                    element.style.fontSize = (parseInt(element.style.fontSize) - 5) + 'px';
+                }
+            }
+        }
+
+        // DOM이 로드된 후 실행
         document.addEventListener('DOMContentLoaded', function() {
+            const textElements = document.querySelectorAll('.text.top, .text.mid, .text.bot');
+            textElements.forEach(adjustTextSize);
+
+            // 폼 제출 시 텍스트 크기 조정
             document.getElementById('uploadForm').addEventListener('submit', function(event) {
                 event.preventDefault();
+                
                 // 텍스트 업데이트
                 document.getElementById('topText').innerText = document.getElementById('topInput').value;
                 document.getElementById('midText').innerText = document.getElementById('midInput').value;
                 document.getElementById('botText').innerText = document.getElementById('botInput').value;
                 document.getElementById('subText').innerText = document.getElementById('subInput').value;
 
-                // 이미지 업데이트
+                // 텍스트 크기 재조정
+                textElements.forEach(adjustTextSize);
+
+                // 이미지 업데이트 (기존 코드)
                 const file = document.getElementById('imageInput').files[0];
                 if (file) {
                     const reader = new FileReader();
