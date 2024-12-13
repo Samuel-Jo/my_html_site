@@ -129,21 +129,31 @@
         function adjustTextSize(element) {
             const container = document.querySelector('.container');
             const containerWidth = container.offsetWidth - 40; // 패딩 고려
-            const text = element.innerText;
             
             // 초기 스타일 설정
             element.style.fontSize = '160px';
             element.style.letterSpacing = '0px';
+            element.style.transform = 'scaleX(1)'; // 장평 초기화
             
             // 텍스트가 컨테이너를 벗어나는 경우 조정
             while (element.offsetWidth > containerWidth && parseInt(element.style.fontSize) > 50) {
-                // 먼저 자간 조정 시도
-                if (parseInt(element.style.letterSpacing) > -3) {
+                // 1. 먼저 자간을 최대한 줄임
+                if (parseInt(element.style.letterSpacing) > -5) {
                     element.style.letterSpacing = (parseInt(element.style.letterSpacing) - 1) + 'px';
                 } 
-                // 자간 조정으로 부족하면 폰트 크기 조정
+                // 2. 자간 조정 후 장평 조절 시도
+                else if (!element.style.transform || element.style.transform === 'scaleX(1)') {
+                    element.style.transform = 'scaleX(0.9)';
+                }
+                else if (element.style.transform === 'scaleX(0.9)') {
+                    element.style.transform = 'scaleX(0.8)';
+                }
+                // 3. 위 방법으로도 부족하면 폰트 크기 조정
                 else {
                     element.style.fontSize = (parseInt(element.style.fontSize) - 5) + 'px';
+                    // 폰트 크기가 줄어들 때마다 자간과 장평을 초기화하고 다시 시도
+                    element.style.letterSpacing = '0px';
+                    element.style.transform = 'scaleX(1)';
                 }
             }
         }
