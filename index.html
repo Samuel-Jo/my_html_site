@@ -130,53 +130,79 @@
             const container = document.querySelector('.container');
             const containerWidth = container.offsetWidth - 40; // 패딩 고려
             
+            // 각 요소별 기준 텍스트 길이 설정
+            const baseTexts = {
+                midText: "자신감 넘치는",
+                botText: "스타일 연출법!",
+                subText: "중년의 품격과 세련미를 완성하는 필수 패션 팁!"
+            };
+
             // 초기 스타일 설정
-            element.style.fontSize = '160px';
-            element.style.letterSpacing = '0px';
-            element.style.transform = 'scaleX(1)'; // 장평 초기화
+            if (element.classList.contains('sub')) {
+                element.style.fontSize = '55px';
+                element.style.letterSpacing = '0px';
+            } else if (element.classList.contains('mid')) {
+                element.style.fontSize = '160px';
+                element.style.letterSpacing = '-1px'; // 기본 자간 좁게
+            } else if (element.classList.contains('bot')) {
+                element.style.fontSize = '160px';
+                element.style.letterSpacing = '-1px'; // 기본 자간 좁게
+            } else {
+                element.style.fontSize = '160px';
+            }
+
+            element.style.transform = 'scaleX(1)';
             
+            // 현재 텍스트 길이와 기준 텍스트 길이 비교
+            const currentText = element.innerText;
+            const baseText = baseTexts[element.id] || "";
+            const lengthRatio = currentText.length / (baseText.length || 1);
+
             // 텍스트가 컨테이너를 벗어나는 경우 조정
-            while (element.offsetWidth > containerWidth && parseInt(element.style.fontSize) > 50) {
-                // 1. 먼저 자간을 최대한 줄임
-                if (parseInt(element.style.letterSpacing) > -5) {
-                    element.style.letterSpacing = (parseInt(element.style.letterSpacing) - 1) + 'px';
-                } 
-                // 2. 자간 조정 후 장평 조절 시도
-                else if (!element.style.transform || element.style.transform === 'scaleX(1)') {
-                    element.style.transform = 'scaleX(0.9)';
-                }
-                else if (element.style.transform === 'scaleX(0.9)') {
-                    element.style.transform = 'scaleX(0.8)';
-                }
-                // 3. 위 방법으로도 부족하면 폰트 크기 조정
-                else {
-                    element.style.fontSize = (parseInt(element.style.fontSize) - 5) + 'px';
-                    // 폰트 크기가 줄어들 때마다 자간과 장평을 초기화하고 다시 시도
-                    element.style.letterSpacing = '0px';
-                    element.style.transform = 'scaleX(1)';
+            while (element.offsetWidth > containerWidth && parseInt(element.style.fontSize) > 30) {
+                if (element.classList.contains('sub')) {
+                    // sub 텍스트는 자간을 더 좁게 조정 가능
+                    if (parseInt(element.style.letterSpacing) > -3) {
+                        element.style.letterSpacing = (parseInt(element.style.letterSpacing) - 0.5) + 'px';
+                    } else {
+                        element.style.fontSize = (parseInt(element.style.fontSize) - 2) + 'px';
+                    }
+                } else {
+                    // mid와 bot 텍스트는 장평을 더 적극적으로 활용
+                    if (parseInt(element.style.letterSpacing) > -4) {
+                        element.style.letterSpacing = (parseInt(element.style.letterSpacing) - 0.5) + 'px';
+                    } else if (!element.style.transform || element.style.transform === 'scaleX(1)') {
+                        element.style.transform = 'scaleX(0.95)';
+                    } else if (element.style.transform === 'scaleX(0.95)') {
+                        element.style.transform = 'scaleX(0.9)';
+                    } else if (element.style.transform === 'scaleX(0.9)') {
+                        element.style.transform = 'scaleX(0.85)';
+                    } else {
+                        // 장평 조정으로도 부족하면 폰트 크기 조정
+                        element.style.fontSize = (parseInt(element.style.fontSize) - 3) + 'px';
+                        // 폰트 크기가 줄어들 때 장평과 자간 초기화
+                        element.style.letterSpacing = '-1px';
+                        element.style.transform = 'scaleX(1)';
+                    }
                 }
             }
         }
 
         // DOM이 로드된 후 실행
         document.addEventListener('DOMContentLoaded', function() {
-            const textElements = document.querySelectorAll('.text.top, .text.mid, .text.bot');
+            const textElements = document.querySelectorAll('.text.top, .text.mid, .text.bot, .text.sub');
             textElements.forEach(adjustTextSize);
 
-            // 폼 제출 시 텍스트 크기 조정
             document.getElementById('uploadForm').addEventListener('submit', function(event) {
                 event.preventDefault();
                 
-                // 텍스트 업데이트
                 document.getElementById('topText').innerText = document.getElementById('topInput').value;
                 document.getElementById('midText').innerText = document.getElementById('midInput').value;
                 document.getElementById('botText').innerText = document.getElementById('botInput').value;
                 document.getElementById('subText').innerText = document.getElementById('subInput').value;
 
-                // 텍스트 크기 재조정
                 textElements.forEach(adjustTextSize);
 
-                // 이미지 업데이트 (기존 코드)
                 const file = document.getElementById('imageInput').files[0];
                 if (file) {
                     const reader = new FileReader();
