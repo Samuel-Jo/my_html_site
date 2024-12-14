@@ -35,7 +35,7 @@
             font-family: 'Euljiro', sans-serif;
         }
         .text.top {
-            top: 20px;
+            top: 30px;
             left: 8px;
             color: #fff;
             font-size: 150px;
@@ -133,7 +133,14 @@
             }
 
             // 텍스트가 이미지와 겹치지 않도록 추가 조정
-            if (element === document.getElementById('midText') || element === document.getElementById('botText')) {
+            if (element === document.getElementById('midText')) {
+                while (element.scrollWidth > maxWidth && letterSpacing > -10) {
+                    letterSpacing -= 0.5; // 자간 줄이기
+                    element.style.letterSpacing = letterSpacing + 'px';
+                }
+            }
+
+            if (element === document.getElementById('botText')) {
                 while (element.scrollWidth > maxWidth && letterSpacing > -10) {
                     letterSpacing -= 0.5; // 자간 줄이기
                     element.style.letterSpacing = letterSpacing + 'px';
