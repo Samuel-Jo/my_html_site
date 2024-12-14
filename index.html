@@ -48,7 +48,7 @@
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         }
         .text.bot {
-            top: 500px;
+            top: 430px;
             left: 0;
             color: #ed2424;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -99,7 +99,7 @@
     <div class="container">
         <div class="text top" id="topText">말년 돈관리 생존법 5가지</div>
         <div class="text mid" id="midText">후외없는 노후를</div>
-        <div class="text bot" id="botText">위한 필수 전략!</div>
+        <div class="text bot" id="botText">위한 필수 전략</div>
         <div class="text sub" id="subText">경제적 안정을 위한 핵심 생존 전략, 지금 준비하세요!</div>
         <div class="image" id="imageContainer">
             <img src="노인지혜.png" alt="Image" id="uploadedImage">
@@ -123,15 +123,12 @@
     <script>
         function adjustTextSize(element) {
             const maxWidth = element.clientWidth; // 최대 너비
-            let fontSize = parseFloat(window.getComputedStyle(element).fontSize);
             let letterSpacing = parseFloat(window.getComputedStyle(element).letterSpacing);
             const text = element.innerText;
 
-            // 글자가 최대 너비를 초과할 때까지 폰트 크기와 자간 조정
-            while (element.scrollWidth > maxWidth && fontSize > 10) {
-                fontSize -= 1; // 폰트 크기 줄이기
+            // 글자가 최대 너비를 초과할 때까지 자간 조정
+            while (element.scrollWidth > maxWidth && letterSpacing > -10) { // 자간의 최소값을 -10으로 설정
                 letterSpacing -= 0.5; // 자간 줄이기
-                element.style.fontSize = fontSize + 'px';
                 element.style.letterSpacing = letterSpacing + 'px';
             }
         }
