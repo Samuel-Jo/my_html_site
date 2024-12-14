@@ -131,6 +131,14 @@
                 letterSpacing -= 0.5; // 자간 줄이기
                 element.style.letterSpacing = letterSpacing + 'px';
             }
+
+            // 텍스트가 이미지와 겹치지 않도록 추가 조정
+            if (element === document.getElementById('midText') || element === document.getElementById('botText')) {
+                while (element.scrollWidth > maxWidth && letterSpacing > -10) {
+                    letterSpacing -= 0.5; // 자간 줄이기
+                    element.style.letterSpacing = letterSpacing + 'px';
+                }
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
