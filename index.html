@@ -32,6 +32,7 @@
             white-space: nowrap;
             font-size: 160px;
             line-height: 1.1;
+            font-family: 'Euljiro', sans-serif;
         }
         .text.top {
             top: 20px;
@@ -71,6 +72,8 @@
             width: 300px;
             height: auto;
             z-index: 1;
+            mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
         }
         .image img {
             width: 100%;
@@ -118,6 +121,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
+        function adjustTextSize(element) {
+            const maxWidth = element.clientWidth; // 최대 너비
+            let fontSize = parseFloat(window.getComputedStyle(element).fontSize);
+            let letterSpacing = parseFloat(window.getComputedStyle(element).letterSpacing);
+            const text = element.innerText;
+
+            // 글자가 최대 너비를 초과할 때까지 폰트 크기와 자간 조정
+            while (element.scrollWidth > maxWidth && fontSize > 10) {
+                fontSize -= 1; // 폰트 크기 줄이기
+                letterSpacing -= 0.5; // 자간 줄이기
+                element.style.fontSize = fontSize + 'px';
+                element.style.letterSpacing = letterSpacing + 'px';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('uploadForm').addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -146,6 +164,12 @@
                     }
                     reader.readAsDataURL(file);
                 }
+
+                // 텍스트 업데이트 후 크기 조정
+                adjustTextSize(document.getElementById('topText'));
+                adjustTextSize(document.getElementById('midText'));
+                adjustTextSize(document.getElementById('botText'));
+                adjustTextSize(document.getElementById('subText'));
             });
 
             document.getElementById('saveButton').addEventListener('click', function() {
