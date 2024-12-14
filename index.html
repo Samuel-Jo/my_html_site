@@ -35,23 +35,32 @@
             font-family: 'Euljiro', sans-serif;
         }
         .text.top {
-            top: 30px;
-            left: 8px;
+            top: 20px;
+            left: 0px;
             color: #fff;
             font-size: 150px;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            max-width: 1200px;
+            overflow: hidden;
+            white-space: nowrap;
         }
         .text.mid {
             top: 200px;
             left: 0;
             color: #ed1818;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            max-width: 880px;
+            overflow: hidden;
+            white-space: nowrap;
         }
         .text.bot {
             top: 420px;
             left: 0;
             color: #ed2424;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            max-width: 880px;
+            overflow: hidden;
+            white-space: nowrap;
         }
         .text.sub {
             bottom: 5px;
@@ -122,7 +131,7 @@
 
     <script>
         function adjustTextSize(element) {
-            const maxWidth = element.clientWidth; // 최대 너비
+            const maxWidth = parseFloat(window.getComputedStyle(element).maxWidth); // 최대 너비
             let letterSpacing = parseFloat(window.getComputedStyle(element).letterSpacing);
             const text = element.innerText;
 
