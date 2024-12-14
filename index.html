@@ -74,11 +74,11 @@
             position: absolute;
             right: 10px; 
             bottom: 200px;
-            width: 700px;
+            width: 300px;
             height: auto;
             z-index: 1;
-            mask-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-            -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%); // 그라데이션 강도 증가
+            -webkit-mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 70%); // 그라데이션 강도 증가
         }
         .image img {
             width: 100%;
