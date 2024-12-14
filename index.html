@@ -77,8 +77,8 @@
             width: 700px;
             height: auto;
             z-index: 1;
-            mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 30%); // 그라데이션 강도 증가
-            -webkit-mask-image: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 30%); // 그라데이션 강도 증가
+            mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 30%); // 그라데이션 강도 증가
+            -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 30%); // 그라데이션 강도 증가
         }
         .image img {
             width: 100%;
@@ -131,10 +131,16 @@
             let letterSpacing = parseFloat(window.getComputedStyle(element).letterSpacing);
             const text = element.innerText;
 
-            // 글자가 최대 너비를 초과할 때까지 자간 조정
-            while (element.scrollWidth > maxWidth && letterSpacing > -10) { // 자간의 최소값을 -10으로 설정
-                letterSpacing -= 0.5; // 자간 줄이기
+            // 숫자인 경우 자간을 -10px로 설정
+            if (!isNaN(text)) {
+                letterSpacing = -10; // 자간을 -10px로 설정
                 element.style.letterSpacing = letterSpacing + 'px';
+            } else {
+                // 글자가 최대 너비를 초과할 때까지 자간 조정
+                while (element.scrollWidth > maxWidth && letterSpacing > -10) { // 자간의 최소값을 -10으로 설정
+                    letterSpacing -= 0.5; // 자간 줄이기
+                    element.style.letterSpacing = letterSpacing + 'px';
+                }
             }
 
             if (element === document.getElementById('botText')) {
