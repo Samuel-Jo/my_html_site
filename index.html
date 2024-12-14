@@ -26,7 +26,6 @@
             letter-spacing: -0.094px;
             z-index: 2;
             width: auto;
-            text-overflow: ellipsis;
             white-space: nowrap;
             font-size: 160px;
             line-height: 1.1;
@@ -37,7 +36,7 @@
             left: 0px;
             color: #fff;
             font-size: 150px;
-            text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
             max-width: 1200px;
             white-space: nowrap;
         }
@@ -45,7 +44,7 @@
             top: 200px;
             left: 0;
             color: #ed1818;
-            text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
             max-width: 880px;
             white-space: nowrap;
         }
@@ -53,7 +52,7 @@
             top: 420px;
             left: 0;
             color: #ed2424;
-            text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
             max-width: 880px;
             white-space: nowrap;
         }
@@ -65,7 +64,6 @@
             color: #5ef894;
             position: absolute;
             white-space: nowrap;
-            text-overflow: ellipsis;
 
         }
         .image {
@@ -117,9 +115,9 @@
         <input type="text" placeholder="Sub Text" id="subInput">
         <input type="file" id="imageInput" accept="image/*">
         <button type="submit">업로드</button>
+        <button id="saveButton">저장하기</button>
     </form>
 
-    <button id="saveButton">저장하기</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -133,14 +131,6 @@
             while (element.scrollWidth > maxWidth && letterSpacing > -10) { // 자간의 최소값을 -10으로 설정
                 letterSpacing -= 0.5; // 자간 줄이기
                 element.style.letterSpacing = letterSpacing + 'px';
-            }
-
-            // 텍스트가 이미지와 겹치지 않도록 추가 조정
-            if (element === document.getElementById('midText')) {
-                while (element.scrollWidth > maxWidth && letterSpacing > -10) {
-                    letterSpacing -= 0.5; // 자간 줄이기
-                    element.style.letterSpacing = letterSpacing + 'px';
-                }
             }
 
             if (element === document.getElementById('botText')) {
